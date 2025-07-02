@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Import Poppins from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html, body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background: #F8F9FA;
+  color: #495057;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+section {
+  transition: background 0.5s, color 0.5s;
+}
+
+button, .btn, a.button {
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
+  box-shadow: 0 2px 16px 0 rgba(0,87,183,0.08);
+  border-radius: 9999px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+button:hover, .btn:hover, a.button:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 24px 0 rgba(215,38,49,0.12);
+}
+
+.card, .shadow-lg {
+  box-shadow: 0 4px 32px 0 rgba(0,87,183,0.10);
+  border-radius: 1.5rem;
+  transition: box-shadow 0.3s;
+}
+
+.card:hover, .shadow-lg:hover {
+  box-shadow: 0 8px 40px 0 rgba(0,87,183,0.18);
+}
+
+@media (max-width: 640px) {
+  html, body {
+    font-size: 16px;
+  }
+  button, .btn, a.button {
+    padding: 0.75em 1.2em;
+    font-size: 1em;
+  }
+  .card, .shadow-lg {
+    border-radius: 1em;
+  }
+}
