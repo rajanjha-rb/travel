@@ -10,18 +10,21 @@ const testimonials = [
     name: "Rustam Dhital",
     designation: "Chairperson",
     src: "/chairperson.jpeg",
+    alt: "Portrait of Rustam Dhital, Chairperson"
   },
   {
     quote: "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
     name: "Rupesh Dhital",
     designation: "Director",
     src: "/director.jpg",
+    alt: "Portrait of Rupesh Dhital, Director"
   },
   {
     quote: "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
     name: "Aayush Panta",
     designation: "Manager",
     src: "/manager.jpg",
+    alt: "Portrait of Aayush Panta, Manager"
   },
 ];
 

@@ -78,7 +78,6 @@ export default function HeroSection() {
   // When next image is loaded and we're transitioning, update text and start fade
   useEffect(() => {
     if (transitioning && nextLoaded && nextIndex !== null) {
-      console.log('Transition: next image loaded, updating displayedIndex to', nextIndex);
       setDisplayedIndex(nextIndex);
     }
   }, [transitioning, nextLoaded, nextIndex]);
@@ -86,7 +85,6 @@ export default function HeroSection() {
   // When next image is loaded and we're transitioning, finish the transition
   useEffect(() => {
     if (transitioning && nextLoaded && nextIndex !== null && displayedIndex === nextIndex) {
-      console.log('Transition: finishing, setting currentIndex to', nextIndex);
       const t = setTimeout(() => {
         setCurrentIndex(nextIndex);
         setNextIndex(null);
@@ -107,7 +105,6 @@ export default function HeroSection() {
 
   // Helper for manual navigation with fade
   const handleManualNav = (idx: number) => {
-    console.log('Manual nav to', idx);
     setNextIndex(idx);
     setTransitioning(true);
     setNextLoaded(false);
@@ -117,10 +114,6 @@ export default function HeroSection() {
       setTransitioning(false);
     }, 350);
   };
-
-  useEffect(() => {
-    console.log('State:', { currentIndex, nextIndex, displayedIndex, transitioning, nextLoaded, hydrated, firstTransitionStarted });
-  });
 
   return (
     <section className="relative w-full flex flex-col justify-between items-center min-h-[400px] sm:min-h-[500px] font-sans bg-[#F8F9FA] overflow-x-hidden px-1 sm:px-0">
@@ -133,7 +126,7 @@ export default function HeroSection() {
             alt="preload"
             width={400}
             height={200}
-            quality={60}
+            quality={40}
             style={{ display: 'none' }}
           />
         ))}
@@ -144,18 +137,18 @@ export default function HeroSection() {
         tabIndex={0}
         aria-label="Hero image carousel"
       >
-        {/* Current image fades out only after next image is loaded */}
+        {/* Current image always fully opaque */}
         <Image
           key={current.img + '-current'}
           src={current.img}
           alt="Hero background"
           fill
-          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 1200px"
+          sizes="(max-width: 600px) 100vw, 400px"
           fetchPriority="high"
-          quality={100}
+          quality={60}
           priority={currentIndex === 0}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${(transitioning && nextLoaded) ? 'opacity-0' : 'opacity-100'}`}
-          style={{ zIndex: 1, objectPosition: 'center', pointerEvents: 'none', filter: 'contrast(1.2) brightness(0.95)' }}
+          className="absolute inset-0 w-full h-full object-cover opacity-100 transition-none"
+          style={{ zIndex: 1, objectPosition: 'center', pointerEvents: 'none' }}
           draggable={false}
         />
         {/* Next image fades in on top, only during transition */}
@@ -165,15 +158,12 @@ export default function HeroSection() {
             src={next.img}
             alt="Hero background"
             fill
-            sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 1200px"
-            quality={100}
+            sizes="(max-width: 600px) 100vw, 400px"
+            quality={60}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${nextLoaded ? 'opacity-100' : 'opacity-0'}`}
-            style={{ zIndex: 2, objectPosition: 'center', pointerEvents: 'none', filter: 'contrast(1.2) brightness(0.95)' }}
+            style={{ zIndex: 2, objectPosition: 'center', pointerEvents: 'none' }}
             draggable={false}
-            onLoad={() => {
-              console.log('Next image loaded:', next.img);
-              requestAnimationFrame(() => setNextLoaded(true));
-            }}
+            onLoad={() => setNextLoaded(true)}
           />
         )}
         {/* Overlayed Content: Only current text, no animation, no layout jump */}

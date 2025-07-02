@@ -31,6 +31,14 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased ${inter.className}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0057B7" />
+        <meta name="description" content="Travel the world with Brothers Holidays!" />
+        <meta property="og:title" content="Brothers Holidays" />
+        <meta property="og:description" content="Travel the world with Brothers Holidays!" />
+        <meta property="og:image" content="/travelLogo.svg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yourdomain.com/" />
       </head>
       <body>
         <Navbar />

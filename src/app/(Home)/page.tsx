@@ -2,10 +2,12 @@ export const revalidate = 60; // Enable ISR: revalidate every 60 seconds
 import React from 'react';
 import HeroSection from './components/heroSection';
 import SearchBox from './components/searchBox';
-import TeamSection from '../../components/TeamSection';
-import About from '../../components/about';
-import TestimonialsSection from './components/TestimonialsSection';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+
+const TestimonialsSection = dynamic(() => import('./components/TestimonialsSection'), { loading: () => <div>Loading testimonials...</div> });
+const TeamSection = dynamic(() => import('../../components/TeamSection'), { loading: () => <div>Loading team...</div> });
+const About = dynamic(() => import('../../components/about'), { loading: () => <div>Loading about...</div> });
 
 // Placeholder components for new sections
 function TopDestinations() {
@@ -16,21 +18,21 @@ function TopDestinations() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {/* Example destination cards */}
           <div className="rounded-2xl shadow-lg overflow-hidden bg-blue-50 hover:scale-105 transition-transform">
-            <Image src="/1.webp" alt="Kathmandu" width={404} height={227} className="w-full h-48 object-cover" sizes="404px" quality={80} />
+            <Image src="/1.webp" alt="Kathmandu" width={400} height={200} className="w-full h-48 object-cover" sizes="(max-width: 600px) 100vw, 400px" quality={60} priority />
             <div className="p-4">
               <h3 className="font-bold text-xl mb-2 text-blue-900">Kathmandu</h3>
               <p className="text-gray-600">The heart of Nepal, rich in culture and history.</p>
             </div>
           </div>
           <div className="rounded-2xl shadow-lg overflow-hidden bg-blue-50 hover:scale-105 transition-transform">
-            <Image src="/2.webp" alt="Pokhara" width={404} height={227} className="w-full h-48 object-cover" sizes="404px" quality={80} />
+            <Image src="/2.webp" alt="Pokhara" width={400} height={200} className="w-full h-48 object-cover" sizes="(max-width: 600px) 100vw, 400px" quality={60} />
             <div className="p-4">
               <h3 className="font-bold text-xl mb-2 text-blue-900">Pokhara</h3>
               <p className="text-gray-600">A paradise for adventure and natural beauty.</p>
             </div>
           </div>
           <div className="rounded-2xl shadow-lg overflow-hidden bg-blue-50 hover:scale-105 transition-transform">
-            <Image src="/3.webp" alt="Chitwan" width={404} height={227} className="w-full h-48 object-cover" sizes="404px" quality={80} />
+            <Image src="/3.webp" alt="Chitwan" width={400} height={200} className="w-full h-48 object-cover" sizes="(max-width: 600px) 100vw, 400px" quality={60} />
             <div className="p-4">
               <h3 className="font-bold text-xl mb-2 text-blue-900">Chitwan</h3>
               <p className="text-gray-600">Wildlife, jungle safaris, and unforgettable experiences.</p>
@@ -49,22 +51,22 @@ function WhyChooseUs() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-yellow-600">Why Choose Us?</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div className="flex flex-col items-center">
-            <Image src="/globe.svg" alt="Global Expertise" width={64} height={64} className="w-16 h-16 mb-4" sizes="64px" quality={80} />
+            <Image src="/globe.svg" alt="Global Expertise" width={64} height={64} className="w-16 h-16 mb-4" sizes="(max-width: 600px) 100vw, 64px" quality={60} />
             <h3 className="font-bold text-lg mb-2 text-blue-900">Global Expertise</h3>
             <p className="text-gray-600">Years of experience crafting unique journeys worldwide.</p>
           </div>
           <div className="flex flex-col items-center">
-            <Image src="/window.svg" alt="Personalized Service" width={64} height={64} className="w-16 h-16 mb-4" sizes="64px" quality={80} />
+            <Image src="/window.svg" alt="Personalized Service" width={64} height={64} className="w-16 h-16 mb-4" sizes="(max-width: 600px) 100vw, 64px" quality={60} />
             <h3 className="font-bold text-lg mb-2 text-blue-900">Personalized Service</h3>
             <p className="text-gray-600">Tailored itineraries and dedicated support for every traveler.</p>
           </div>
           <div className="flex flex-col items-center">
-            <Image src="/file.svg" alt="Trusted Partners" width={64} height={64} className="w-16 h-16 mb-4" sizes="64px" quality={80} />
+            <Image src="/file.svg" alt="Trusted Partners" width={64} height={64} className="w-16 h-16 mb-4" sizes="(max-width: 600px) 100vw, 64px" quality={60} />
             <h3 className="font-bold text-lg mb-2 text-blue-900">Trusted Partners</h3>
             <p className="text-gray-600">We work with the best hotels, airlines, and guides.</p>
           </div>
           <div className="flex flex-col items-center">
-            <Image src="/next.svg" alt="24/7 Support" width={64} height={64} className="w-16 h-16 mb-4" sizes="64px" quality={80} />
+            <Image src="/next.svg" alt="24/7 Support" width={64} height={64} className="w-16 h-16 mb-4" sizes="(max-width: 600px) 100vw, 64px" quality={60} />
             <h3 className="font-bold text-lg mb-2 text-blue-900">24/7 Support</h3>
             <p className="text-gray-600">Always here for you, before, during, and after your trip.</p>
           </div>
@@ -93,7 +95,7 @@ export default function HomePage() {
       <section className="py-16 bg-gradient-to-br from-yellow-50 to-blue-50">
         <div className="max-w-4xl mx-auto px-4">
           <TeamSection />
-    </div>
+        </div>
       </section>
     </main>
   );

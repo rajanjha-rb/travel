@@ -11,6 +11,7 @@ type Testimonial = {
   name: string;
   designation: string;
   src: string;
+  alt?: string;
 };
 
 const PALETTE = {
@@ -92,7 +93,7 @@ const AnimatedTestimonials = ({
                 >
                   <Image
                     src={testimonial.src}
-                    alt={testimonial.name}
+                    alt={testimonial.alt || testimonial.name}
                     width={400}
                     height={400}
                     draggable={false}
