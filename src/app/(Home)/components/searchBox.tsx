@@ -3,14 +3,6 @@
 import React, { useState } from 'react';
 import { MapPin, Moon, DollarSign, Search } from 'lucide-react';
 
-const PALETTE = {
-  blue: "#0057B7",
-  gold: "#FFD166",
-  white: "#F8F9FA",
-  gray: "#7B8A99",
-  red: "#D72631",
-};
-
 export default function SearchBox() {
   const [destination, setDestination] = useState('');
   const [nights, setNights] = useState('');
