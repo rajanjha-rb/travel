@@ -5,17 +5,17 @@ import Image from 'next/image';
 
 const slides = [
   {
-    img: "/1.png",
+    img: "/1.webp",
     headline: "Explore the Hidden Gems of Nepal",
     subheadline: "From Himalayan peaks to ancient temples — discover all.",
   },
   {
-    img: "/2.png",
+    img: "/2.webp",
     headline: "Journey Through Culture and Nature",
     subheadline: "Nepal offers unforgettable experiences at every turn.",
   },
   {
-    img: "/3.png",
+    img: "/3.webp",
     headline: "Timeless Nepal Awaits Your Next Escape",
     subheadline: "Nepal welcomes every soul seeking adventure and peace",
   },
@@ -78,6 +78,7 @@ export default function HeroSection() {
   // When next image is loaded and we're transitioning, update text and start fade
   useEffect(() => {
     if (transitioning && nextLoaded && nextIndex !== null) {
+      console.log('Transition: next image loaded, updating displayedIndex to', nextIndex);
       setDisplayedIndex(nextIndex);
     }
   }, [transitioning, nextLoaded, nextIndex]);
@@ -85,6 +86,7 @@ export default function HeroSection() {
   // When next image is loaded and we're transitioning, finish the transition
   useEffect(() => {
     if (transitioning && nextLoaded && nextIndex !== null && displayedIndex === nextIndex) {
+      console.log('Transition: finishing, setting currentIndex to', nextIndex);
       const t = setTimeout(() => {
         setCurrentIndex(nextIndex);
         setNextIndex(null);
@@ -105,6 +107,7 @@ export default function HeroSection() {
 
   // Helper for manual navigation with fade
   const handleManualNav = (idx: number) => {
+    console.log('Manual nav to', idx);
     setNextIndex(idx);
     setTransitioning(true);
     setNextLoaded(false);
@@ -114,6 +117,10 @@ export default function HeroSection() {
       setTransitioning(false);
     }, 350);
   };
+
+  useEffect(() => {
+    console.log('State:', { currentIndex, nextIndex, displayedIndex, transitioning, nextLoaded, hydrated, firstTransitionStarted });
+  });
 
   return (
     <section className="relative w-full flex flex-col justify-between items-center min-h-[400px] sm:min-h-[500px] font-sans bg-[#F8F9FA] overflow-x-hidden px-1 sm:px-0">
@@ -126,7 +133,7 @@ export default function HeroSection() {
             alt="preload"
             width={400}
             height={200}
-            quality={40}
+            quality={60}
             style={{ display: 'none' }}
           />
         ))}
@@ -137,18 +144,18 @@ export default function HeroSection() {
         tabIndex={0}
         aria-label="Hero image carousel"
       >
-        {/* Current image always fully opaque */}
+        {/* Current image fades out only after next image is loaded */}
         <Image
           key={current.img + '-current'}
           src={current.img}
           alt="Hero background"
           fill
-          sizes="(max-width: 600px) 100vw, 400px"
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 1200px"
           fetchPriority="high"
-          quality={60}
+          quality={100}
           priority={currentIndex === 0}
-          className="absolute inset-0 w-full h-full object-cover opacity-100 transition-none"
-          style={{ zIndex: 1, objectPosition: 'center', pointerEvents: 'none' }}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${(transitioning && nextLoaded) ? 'opacity-0' : 'opacity-100'}`}
+          style={{ zIndex: 1, objectPosition: 'center', pointerEvents: 'none', filter: 'contrast(1.2) brightness(0.95)' }}
           draggable={false}
         />
         {/* Next image fades in on top, only during transition */}
@@ -158,12 +165,15 @@ export default function HeroSection() {
             src={next.img}
             alt="Hero background"
             fill
-            sizes="(max-width: 600px) 100vw, 400px"
-            quality={60}
+            sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 1200px"
+            quality={100}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${nextLoaded ? 'opacity-100' : 'opacity-0'}`}
-            style={{ zIndex: 2, objectPosition: 'center', pointerEvents: 'none' }}
+            style={{ zIndex: 2, objectPosition: 'center', pointerEvents: 'none', filter: 'contrast(1.2) brightness(0.95)' }}
             draggable={false}
-            onLoad={() => setNextLoaded(true)}
+            onLoad={() => {
+              console.log('Next image loaded:', next.img);
+              requestAnimationFrame(() => setNextLoaded(true));
+            }}
           />
         )}
         {/* Overlayed Content: Only current text, no animation, no layout jump */}
