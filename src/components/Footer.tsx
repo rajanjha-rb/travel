@@ -56,7 +56,7 @@ export default function Footer() {
             <span className="text-2xl md:text-3xl font-bold italic font-sans" style={{ color: PALETTE.red }}>Holidays</span>
           </div>
           <p className="text-sm" style={{ color: PALETTE.gray, maxWidth: 260 }}>
-            Luxury escapes, tailored journeys, and unforgettable experiences—crafted for you by the UK's most trusted travel experts.
+            Luxury escapes, tailored journeys, and unforgettable experiences4crafted for you by the UK&apos;s most trusted travel experts.
           </p>
           <div className="mt-2 w-full">
             <span className="uppercase text-xs font-bold tracking-widest block mb-1" style={{ color: PALETTE.gold }}>Trusted by</span>
