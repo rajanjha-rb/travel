@@ -93,12 +93,12 @@ const AnimatedTestimonials = ({
                   <Image
                     src={testimonial.src}
                     alt={testimonial.name}
-                    width={500}
-                    height={500}
+                    width={400}
+                    height={400}
                     draggable={false}
                     className="h-full w-full rounded-3xl object-cover object-center"
-                    sizes="(max-width: 600px) 100vw, 500px"
-                    quality={70}
+                    sizes="(max-width: 600px) 100vw, 400px"
+                    quality={60}
                   />
                 </motion.div>
               ))}
