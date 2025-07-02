@@ -2,17 +2,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from 'next/image';
-import SearchBox from './searchBox';
-
-const bgImages = ["/1.png", "/2.png", "/3.png"];
-
-const PALETTE = {
-  blue: "#0057B7",         // Nav backgrounds, accents
-  red: "#D72631",          // Buttons, highlights
-  gold: "#FFD166",         // Accents
-  white: "#F8F9FA",        // Backgrounds, cards
-  gray: "#495057",         // Text, contrast
-};
 
 const slides = [
   {
