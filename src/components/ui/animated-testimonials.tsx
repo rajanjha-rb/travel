@@ -97,6 +97,8 @@ const AnimatedTestimonials = ({
                     height={500}
                     draggable={false}
                     className="h-full w-full rounded-3xl object-cover object-center"
+                    sizes="(max-width: 600px) 100vw, 500px"
+                    quality={70}
                   />
                 </motion.div>
               ))}

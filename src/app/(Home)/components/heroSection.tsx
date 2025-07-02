@@ -127,6 +127,7 @@ export default function HeroSection() {
             width={1920}
             height={1080}
             priority={false}
+            quality={60}
             style={{ display: 'none' }}
           />
         ))}
@@ -143,9 +144,10 @@ export default function HeroSection() {
           src={current.img}
           alt="Hero background"
           fill
-          sizes="100vw"
+          sizes="(max-width: 600px) 100vw, 1200px"
+          fetchPriority="high"
           priority={currentIndex === 0}
-          quality={90}
+          quality={80}
           className="absolute inset-0 w-full h-full object-cover opacity-100 transition-none"
           style={{ zIndex: 1, objectPosition: 'center', pointerEvents: 'none' }}
           draggable={false}
@@ -157,9 +159,9 @@ export default function HeroSection() {
             src={next.img}
             alt="Hero background"
             fill
-            sizes="100vw"
+            sizes="(max-width: 600px) 100vw, 1200px"
             priority={false}
-            quality={90}
+            quality={80}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${nextLoaded ? 'opacity-100' : 'opacity-0'}`}
             style={{ zIndex: 2, objectPosition: 'center', pointerEvents: 'none' }}
             draggable={false}
